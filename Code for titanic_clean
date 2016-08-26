@@ -1,0 +1,16 @@
+#1 Enter the missing information in the "embarked" column with 'S'.
+> titanic3 <- mutate(titanic3, embarked = replace(embarked, embarked =='', 'S'))
+
+#2 Fill in the missing values in the Age column with the mean of the values.
+> avg_age <- mean(titanic3$age, na.rm = TRUE)
+> missing_ages <- which(is.na(titanic3$age))
+> titanic3$age[missing_ages] <- avg_age
+
+#3 Generate an NA value for the missing values in the boat column.
+> titanic3 <- mutate(titanic3, boat = replace(boat, boat =='', "None"))
+
+#4 Create a has_cabin_number column that gives a 1 if there is a column number and a 0 if not.
+> titanic3 <- mutate(titanic3, cabin, has_cabin_number = ifelse(cabin == "", "0", "1"))
+
+#5 Rewrite the file.
+> write.csv(titanic3, file = "titanic_clean.csv")
